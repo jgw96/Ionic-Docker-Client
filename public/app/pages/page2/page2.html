@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar primary>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Images</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let image of images">
+    <ion-item (click)="getImage(image.Id)">
+      <h2>{{image.RepoTags[0]}}</h2>
+      <p>ID: {{image.Id}}</p>
+      <p>Size: {{image.Size | bytetomb}}MB</p>
+      <p>Created: {{image.Created | realdate | date}}</p>
+    </ion-item>
+    <ion-item-options>
+      <button (click)="removeImage(image.Id)" danger>
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <button (click)="addImageModal()" fab fab-bottom fab-right fab-fixed>
+    <ion-icon name="add"></ion-icon>
+  </button>
+</ion-content>

@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar primary>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Containers</ion-title>
+    <ion-buttons end>
+      <button (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="page1">
+  <ion-list>
+    <ion-item-sliding *ngFor="let container of containers">
+      <ion-item>
+        <div (click)="getContainer(container.Id)">
+          <h2>{{container.Names[0]}}</h2>
+          <p>Image: {{container.Image}}</p>
+          <p>State: {{container.State}}</p>
+          <p>Status: {{container.Status}}</p>
+        </div>
+        <ion-buttons end>
+          <button (click)="stop(container.Id)" *ngIf="container.State === 'running'" clear danger>
+          Stop
+        </button>
+          <button (click)="start(container.Id)" *ngIf="container.State !== 'running'" clear primary>
+          Start
+        </button>
+        </ion-buttons>
+      </ion-item>
+      <ion-item-options>
+        <button (click)="removeContainer(container.Id)" danger>
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <button (click)="addContainer()" fab fab-bottom fab-right fab-fixed>
+    <ion-icon name="add"></ion-icon>
+  </button>
+</ion-content>
